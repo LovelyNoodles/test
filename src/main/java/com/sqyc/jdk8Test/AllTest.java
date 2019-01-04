@@ -274,6 +274,7 @@ public class AllTest {
 
 	@Test
 	public void iotest() {
-		new A
-	}
+    }
+
+
 }
