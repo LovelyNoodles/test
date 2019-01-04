@@ -1,22 +1,19 @@
 package com.sqyc;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import org.junit.Test;
-
-import com.alibaba.fastjson.JSON;
 
 public class TestTemp {
 
 	@Test
 	public void test1() {
-		List<Object> list = new ArrayList<>();
-		list.add("1");
-		list.add("2");
-		list.add("3");
-		
-		System.out.println(JSON.toJSONString(list));
+		System.out.println(LocalDate.parse("6-04-03", DateTimeFormatter.ofPattern("y-M-d")));
+		System.out.println(LocalDate.parse("2016-4-3", DateTimeFormatter.ofPattern("y-M-d")));
+
+		System.out.println(LocalDate.parse("2016-04-03", DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+		System.out.println(LocalDate.parse("2016-4-3", DateTimeFormatter.ofPattern("yyyy-MM-dd")));
 	}
 
 }
