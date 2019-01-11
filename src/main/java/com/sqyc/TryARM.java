@@ -5,11 +5,14 @@ public class TryARM {
 	public static void main(String[] args) {
 
 		try {
-			try (MyResource resource = new MyResource()) {
+			MyResource myResource = new MyResource();
+			try (MyResource resource = myResource) {
 				resource.doSomething();
 			} catch (Exception e) {
                 System.out.println("main:" + e.getMessage());
             }
+			
+			myResource.close();
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
