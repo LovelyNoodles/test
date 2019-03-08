@@ -1,105 +1,90 @@
 package com.sqyc;
 
+import java.io.UnsupportedEncodingException;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
+import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
+import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.alibaba.fastjson.annotation.JSONField;
 
 public class TestTemp {
 
 	@Test
 	public void test1() {
-		System.out.println(LocalDate.parse("6-04-03", DateTimeFormatter.ofPattern("y-M-d")));
-		System.out.println(LocalDate.parse("2016-4-3", DateTimeFormatter.ofPattern("y-M-d")));
-
-		System.out.println(LocalDate.parse("2016-04-03", DateTimeFormatter.ofPattern("yyyy-MM-dd")));
-		System.out.println(LocalDate.parse("2016-4-3", DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+		String str = "abc";
+		System.out.println(str.contains("a"));
+		System.out.println(str.contains("b"));
+		System.out.println(str.contains("c"));
+		System.out.println(str.contains("d"));
+		
+		System.out.println(str.indexOf("a"));
+		System.out.println(str.indexOf("b"));
+		System.out.println(str.indexOf("c"));
+		System.out.println(str.indexOf("d"));
 	}
-
+	
 	@Test
-	public void test() {
+	public void test2() {
+		LocalDate date = LocalDate.parse("2020-02-27", DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+		LocalDate now = LocalDate.now();
+		long between = ChronoUnit.YEARS.between(date, now);
+		System.out.println(between);
 
-		A a = new A();
-		a.setName("adf");
-		a.setBirthday(new Date());
-
-		String jsonString = JSON.toJSONStringWithDateFormat(a, JSON.DEFFAULT_DATE_FORMAT);
-		JSONObject json = (JSONObject) JSONObject.parse(jsonString);
-		Map<String, Object> paramMap = json.getInnerMap();
-		System.out.println(paramMap);
-		String jsonString1 = JSON.toJSONStringWithDateFormat(a, "yyyy-MM-dd");
-		JSONObject json1 = (JSONObject) JSONObject.parse(jsonString1);
-		Map<String, Object> paramMap1 = json1.getInnerMap();
-		System.out.println(paramMap1);
+		System.out.println(date.isBefore(now));
+		System.out.println(date.isAfter(now));
 	}
-
-	static class A {
-		private String name;
-
-		private Integer age;
-
-		private Date birthday;
-
-		public Integer getAge() {
-			return age;
-		}
-
-		public void setAge(Integer age) {
-			this.age = age;
-		}
-
-		public String getName() {
-			return name;
-		}
-
-		public void setName(String name) {
-			this.name = name;
-		}
-
-		public Date getBirthday() {
-			return birthday;
-		}
-
-		public void setBirthday(Date birthday) {
-			this.birthday = birthday;
-		}
-
-	}
-
+	
 	@Test
 	public void test3() {
-		A a1 = new A();
-		a1.setName("yyp");
-		a1.setAge(1);
-		a1.setBirthday(new Date());
-		A a2 = new A();
-		a2.setName("yyp");
-		a2.setAge(2);
-		a2.setBirthday(new Date());
-		A a3 = new A();
-		a3.setName("abc");
-		a3.setAge(3);
-		a3.setBirthday(new Date());
-		A a4 = new A();
-		a4.setName("asd");
-		a4.setAge(4);
-		a4.setBirthday(new Date());
+		String str = "A1、A2、A3、B1、B2、C1、C2、N、P";
+		System.out.println(str.contains("A1") && !"A1".contains("、"));
+		System.out.println(str.contains("A2、") && !"A2、".contains("、"));
+		System.out.println(str.contains("、A2、") && !"、A2、".contains("、"));
+	}
+	
+	@Test
+	public void test4() {
+		Map<String, Object> param = new HashMap<>();
 
-		List<Object> list = new ArrayList<>();
-		list.add(a1);
-		list.add(a2);
-		list.add(a3);
-		list.add(a4);
+		Map<String, Object> textParam = new HashMap<>();
+		Map<String, Object> atParam = new HashMap<>();
 
+		param.put("msgtype", "text");
+		param.put("text", textParam);
+		param.put("at", atParam);
+
+		textParam.put("content", "yyp is a man ");
+
+		List<String> mobiles = new ArrayList<>();
+		atParam.put("isAtAll", true);
+//		if (mobiles.isEmpty()) {
+//			atParam.put("atMobiles", mobiles);
+//		}
+
+		mobiles.add("15211112222");
+		mobiles.add("15211113333");
+
+		System.out.println(JSON.toJSONString(param));
+		System.out.println(JSON.toJSONString(param));
+		System.out.println(JSON.toJSONString(param));
+	}
+	
+	@Test
+	public void test5() {
+		String[] DRIVING_LICENSE_TYPES = { "A1", "A2", "A3", "B1", "B2", "C1", "C2", "N", "P" };
+		System.out.println(StringUtils.join(DRIVING_LICENSE_TYPES, "|"));
 	}
 
 }

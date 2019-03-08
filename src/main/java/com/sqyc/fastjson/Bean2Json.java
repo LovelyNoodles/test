@@ -1,10 +1,12 @@
 package com.sqyc.fastjson;
 
 import java.util.Date;
+import java.util.Map;
 
 import org.junit.Test;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.annotation.JSONField;
 
 public class Bean2Json {
@@ -23,6 +25,42 @@ public class Bean2Json {
 		// System.out.println(str2);
 	}
 
+	@Test
+	public void test2() {
+		A a = new A();
+		a.setName("adf");
+		a.setBirthday(new Date());
+
+		String jsonString = JSON.toJSONStringWithDateFormat(a, JSON.DEFFAULT_DATE_FORMAT);
+		System.out.println(jsonString);
+		JSONObject json = (JSONObject) JSONObject.parse(jsonString);
+		Map<String, Object> paramMap = json.getInnerMap();
+		paramMap.put("abc", 123);
+		System.out.println(paramMap);
+		
+		String string = JSON.toJSONString(paramMap);
+		System.out.println(string);
+		String msg = JSON.toJSONString(string);
+		System.out.println(msg);
+		
+//		String jsonString1 = JSON.toJSONStringWithDateFormat(a, "yyyy-MM-dd");
+//		JSONObject json1 = (JSONObject) JSONObject.parse(jsonString1);
+//		Map<String, Object> paramMap1 = json1.getInnerMap();
+//		System.out.println(paramMap1);
+
+	}
+
+	@Test
+	public void test3() {
+		String jsonString = "{\r\n" + "    \"msg\": \"上传成功\",\r\n" + "    \"code\": \"1\",\r\n" + "    \"data\": [\r\n"
+				+ "        {\r\n"
+				+ "            \"path\": \"https://test-www-api-img.01zhuanche.com/public/cb/cc/f404f52466bc599c6fb168c1f9f8/28589.pdf\",\r\n"
+				+ "            \"filedName\": \"pdf\",\r\n" + "            \"fileId\": \"28589\"\r\n" + "        }\r\n"
+				+ "    ]\r\n" + "}";
+
+		JSONObject parse = (JSONObject) JSONObject.parse(jsonString);
+	}
+
 	/**
 	 * @ClassName: A
 	 * @Description: TODO
@@ -33,7 +71,6 @@ public class Bean2Json {
 	static class A {
 		private String name;
 		private Integer age;
-		@JSONField(format = "yyyy-MM-dd")
 		private Date birthday;
 
 		public String getName() {
