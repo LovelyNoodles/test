@@ -1,14 +1,9 @@
 package com.sqyc;
 
-import java.io.UnsupportedEncodingException;
-import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
-import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,7 +12,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
 
 public class TestTemp {
 
@@ -65,7 +59,7 @@ public class TestTemp {
 		param.put("text", textParam);
 		param.put("at", atParam);
 
-		textParam.put("content", "yyp is a man ");
+		textParam.put("content", "test");
 
 		List<String> mobiles = new ArrayList<>();
 		atParam.put("isAtAll", true);
