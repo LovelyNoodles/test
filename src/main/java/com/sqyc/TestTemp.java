@@ -1,84 +1,143 @@
 package com.sqyc;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 
-import com.alibaba.fastjson.JSON;
+import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 
 public class TestTemp {
 
-	@Test
-	public void test1() {
-		String str = "abc";
-		System.out.println(str.contains("a"));
-		System.out.println(str.contains("b"));
-		System.out.println(str.contains("c"));
-		System.out.println(str.contains("d"));
-		
-		System.out.println(str.indexOf("a"));
-		System.out.println(str.indexOf("b"));
-		System.out.println(str.indexOf("c"));
-		System.out.println(str.indexOf("d"));
-	}
-	
-	@Test
-	public void test2() {
-		LocalDate date = LocalDate.parse("2020-02-27", DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-		LocalDate now = LocalDate.now();
-		long between = ChronoUnit.YEARS.between(date, now);
-		System.out.println(between);
+    public static void main(String[] args) throws InterruptedException {
+        new Thread(() -> {
+            try {
+                TimeUnit.SECONDS.sleep(5);
+                System.out.println("执行...");
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }).start();
+//        TimeUnit.SECONDS.sleep(6);
+        System.out.println("kill thread ...");
+        System.out.println("interrupted thread ...");
 
-		System.out.println(date.isBefore(now));
-		System.out.println(date.isAfter(now));
-	}
-	
-	@Test
-	public void test3() {
-		String str = "A1、A2、A3、B1、B2、C1、C2、N、P";
-		System.out.println(str.contains("A1") && !"A1".contains("、"));
-		System.out.println(str.contains("A2、") && !"A2、".contains("、"));
-		System.out.println(str.contains("、A2、") && !"、A2、".contains("、"));
-	}
-	
-	@Test
-	public void test4() {
-		Map<String, Object> param = new HashMap<>();
+    }
 
-		Map<String, Object> textParam = new HashMap<>();
-		Map<String, Object> atParam = new HashMap<>();
 
-		param.put("msgtype", "text");
-		param.put("text", textParam);
-		param.put("at", atParam);
+    @Test
+    public void test1() {
+        BigDecimal decimal1 = new BigDecimal(2.3);
+        BigDecimal decimal2 = new BigDecimal(3.5);
 
-		textParam.put("content", "test");
+        BigDecimal subtract = (subtract = decimal2.subtract(decimal1)).compareTo(BigDecimal.ZERO) >= 0 ? subtract : BigDecimal.ZERO;
 
-		List<String> mobiles = new ArrayList<>();
-		atParam.put("isAtAll", true);
-//		if (mobiles.isEmpty()) {
-//			atParam.put("atMobiles", mobiles);
-//		}
+        System.out.println(subtract);
+        System.out.println(decimal2.subtract(decimal1));
+        System.out.println(subtract.compareTo(BigDecimal.ZERO));
 
-		mobiles.add("15211112222");
-		mobiles.add("15211113333");
+    }
 
-		System.out.println(JSON.toJSONString(param));
-		System.out.println(JSON.toJSONString(param));
-		System.out.println(JSON.toJSONString(param));
-	}
-	
-	@Test
-	public void test5() {
-		String[] DRIVING_LICENSE_TYPES = { "A1", "A2", "A3", "B1", "B2", "C1", "C2", "N", "P" };
-		System.out.println(StringUtils.join(DRIVING_LICENSE_TYPES, "|"));
-	}
+    @Test
+    public void test2() {
+        A a1 = new A();
+        A a2 = new A();
+        A a3 = new A();
+        A a4 = new A();
+        A a5 = new A();
+
+        a1.setName("C003");
+        a2.setName("C004");
+        a3.setName("C002");
+        a4.setName("C001");
+        a5.setName("C001");
+
+        a1.setAmount(new BigDecimal(2.1));
+        a2.setAmount(new BigDecimal(3.25));
+        a3.setAmount(new BigDecimal(5.03));
+        a4.setAmount(new BigDecimal(6.09));
+        a5.setAmount(new BigDecimal(6.09));
+
+
+        List<A> list = new ArrayList<>();
+        list.add(a1);
+        list.add(a2);
+        list.add(a3);
+        list.add(a4);
+        list.add(a5);
+
+        Map<String, BigDecimal> collect = list.stream().collect(
+                Collectors.groupingBy(A::getName,
+                        Collectors.mapping(A::getAmount, Collectors.reducing(BigDecimal.ZERO, BigDecimal::add))));
+        System.out.println(collect);
+
+        List<Map.Entry<String, BigDecimal>> collect2 = collect.entrySet().stream().sorted(Comparator.comparing(Map.Entry::getKey)).collect(Collectors.toList());
+        System.out.println(collect2);
+
+        List<A> collect1 = list.stream().sorted(Comparator.comparing(A::getName)).collect(Collectors.toList());
+        System.out.println(collect1);
+
+    }
+
+    @Test
+    public void test3() {
+        BigDecimal decimal1 = new BigDecimal(3.2);
+        BigDecimal decimal2 = decimal1;
+        System.out.println(decimal2 == decimal1);
+        BigDecimal decimal3 = decimal1.add(BigDecimal.ZERO);
+        System.out.println(decimal3 == decimal1);
+
+        decimal2 = decimal2.subtract(BigDecimal.ONE);
+        System.out.println(decimal2 == decimal1);
+
+        System.out.println(decimal1);
+        System.out.println(decimal2);
+        System.out.println(decimal3);
+    }
+
+    @Test
+    public void test4() {
+        String str = "123412yyp=asdfasd";
+        String s = "yyp=1";
+        int i = str.lastIndexOf(s);
+        String substring = str.substring(i + s.length());
+        System.out.println(substring);
+    }
+
+    @Test
+    public void test5() {
+        LocalDateTime start = LocalDateTime.now();
+        LocalDateTime end = LocalDateTime.now().plusDays(9).plusHours(-6);
+
+        System.out.println(start);
+        System.out.println(end);
+
+        System.out.println("开始for");
+        for (LocalDate current = start.toLocalDate(); !current.isAfter(end.toLocalDate()); current = current.plusDays(1)) {
+            System.out.println(current);
+            System.out.println(current.getDayOfWeek());
+        }
+    }
+
+    @Test
+    public void test6() {
+        BigDecimal decimal = new BigDecimal(2.08);
+        BigDecimal discount = new BigDecimal((100 - 100) * 0.01);
+//        BigDecimal discount = new BigDecimal((100 - 0) * 0.01);
+
+        BigDecimal multiply = decimal.multiply(discount);
+
+        System.out.println(decimal);
+        System.out.println(multiply);
+        System.out.println(multiply.compareTo(BigDecimal.ZERO) == 0);
+        System.out.println(multiply.compareTo(decimal) == 0);
+
+
+    }
 
 }

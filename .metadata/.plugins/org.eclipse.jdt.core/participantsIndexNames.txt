@@ -1,0 +1,15 @@
+INDEX VERSION 1.131
+C:\YDOC\myRep\test\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\2169974114.index
+\demo-core\src\main\java
+C:\YDOC\myRep\test\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\4265983313.index
+\demo-core\src\main\java
+C:\YDOC\myRep\test\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\3567558633.index
+\demo-core-common\src\main\java
+C:\YDOC\myRep\test\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\1481769933.index
+\coreSuperPOM\src\main\resources
+C:\YDOC\myRep\test\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\1442448622.index
+\demo-core\src\main\java
+C:\YDOC\myRep\test\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\3451596625.index
+\demo-core\src\main\java
+C:\YDOC\myRep\test\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\2531747242.index
+\demo-core\src\main\java

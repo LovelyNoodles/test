@@ -1,1 +1,11 @@
 /target/
+.settings
+.classpath
+.project
+src/main/assembly/bin/
+.idea
+*.iml
+logs
+
+/src/main/resources/rebel-remote.xml
+/src/main/resources/rebel.xml

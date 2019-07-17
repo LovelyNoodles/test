@@ -228,7 +228,6 @@ public class ExportExcel {
 	 * @return 单元格样式
 	 */
 	private static HSSFCellStyle createCellStyle(HSSFWorkbook workbook, short fontsize, boolean flag, boolean flag1) {
-		// TODO Auto-generated method stub
 		HSSFCellStyle style = workbook.createCellStyle();
 		// 是否水平居中
 		if (flag1) {

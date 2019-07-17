@@ -1,46 +1,44 @@
 package com.sqyc.fastjson;
 
+import java.math.BigDecimal;
+import java.util.Date;
+
 public class Person {
 
-	Integer personid;
-	String name;
-	String email;
-	Integer age;
+    private String name;
+    private Integer age;
+    private BigDecimal amount;
+    private Date birthday;
 
-	public Person() {
-		super();
-	}
+    public String getName() {
+        return name;
+    }
 
-	public Integer getPersonid() {
-		return personid;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public void setPersonid(Integer personid) {
-		this.personid = personid;
-	}
+    public Integer getAge() {
+        return age;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public void setAge(Integer age) {
+        this.age = age;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public BigDecimal getAmount() {
+        return amount;
+    }
 
-	public String getEmail() {
-		return email;
-	}
+    public void setAmount(BigDecimal amount) {
+        this.amount = amount;
+    }
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
+    public Date getBirthday() {
+        return birthday;
+    }
 
-	public Integer getAge() {
-		return age;
-	}
-
-	public void setAge(Integer age) {
-		this.age = age;
-	}
-
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
+    }
 }
