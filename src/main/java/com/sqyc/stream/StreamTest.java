@@ -3,6 +3,7 @@ package com.sqyc.stream;
 import org.junit.Test;
 
 import java.util.Arrays;
+import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -29,6 +30,9 @@ class StreamTest {
         String string = "1234,asdf";
         Set<String> set = Arrays.stream(string.split(",")).collect(Collectors.toSet());
         System.out.println(set);
+
+
+        Set<String> collect = Arrays.stream(string.split(",")).sorted().collect(Collectors.toCollection(LinkedHashSet::new));
     }
 
 }
