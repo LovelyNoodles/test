@@ -3,6 +3,23 @@ package com.sqyc.algorithm;
 import com.alibaba.fastjson.JSON;
 import org.junit.Test;
 
+/**
+ * 冒泡排序[Bubble sort]: O(n²)
+ * <p>
+ * 选择排序[Selection sort]: O(n²)
+ * <p>
+ * 插入排序[Insertion sort]: O(n²)
+ * <p>
+ * 希尔排序[Shell's sort]: O(n1.5)
+ * <p>
+ * 快速排序[Quick sort]: O(N*logN)
+ * <p>
+ * 归并排序[Merge sort]: O(N*logN)
+ * <p>
+ * 堆排序[Heap sort]: O(N*logN)
+ * <p>
+ * 基数排序[Radix sort]: O(d(n+r))
+ */
 public class SortTest {
 
     /**
