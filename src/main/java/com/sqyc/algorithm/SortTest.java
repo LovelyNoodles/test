@@ -28,7 +28,7 @@ public class SortTest {
      * java源码中，小数据量的排序用的此算法
      */
     @Test
-    public void test() {
+    public void insertion() {
         int[] arr = {5, 2, 4, 6, 1, 3};
         for (int current = 1; current < arr.length; current++) {
             System.out.print(arr[current] + "-----");
