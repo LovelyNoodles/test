@@ -1,4 +1,0 @@
-INDEX VERSION 1.131+C:\YDOC\myRep\test\.metadata\.plugins\org.eclipse.jdt.core
-2159313377.index
-2613047047.index
-165892949.index
