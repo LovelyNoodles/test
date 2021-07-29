@@ -1,4 +1,4 @@
-package com.sqyc.list;
+package com.sqyc.collection.list;
 
 import java.util.ArrayList;
 import java.util.List;

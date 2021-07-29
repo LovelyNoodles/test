@@ -1,7 +1,4 @@
-package com.sqyc.map;
-
-import java.util.HashMap;
-import java.util.Map;
+package com.sqyc.collection.map;
 
 public class MapTest {
 	public static void main(String[] args) {
