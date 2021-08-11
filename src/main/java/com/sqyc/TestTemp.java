@@ -1,47 +1,40 @@
 package com.sqyc;
 
-import org.apache.commons.lang3.ArrayUtils;
 import org.junit.Test;
 
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.Map;
 
 public class TestTemp {
 
     @Test
     public void test1() {
-//        int[] nums = {2, 7, 11, 15};
-//        int target = 9;
-        int[] nums = {3, 2, 4};
-        int target = 6;
-        int[] ints1 = twoSum1(nums, target);
-        int[] ints2 = twoSum2(nums, target);
-        System.out.println(Arrays.toString(ints1));
-        System.out.println(Arrays.toString(ints2));
+        System.out.println(longestPalindrome("babad"));
     }
 
-    public int[] twoSum1(int[] nums, int target) {
-        for (int i = 0; i < nums.length; i++) {
-            int a = nums[i];
-            int b = target - a;
-            int indexB = ArrayUtils.indexOf(nums, b);
-            if (indexB != i && indexB >= 0) {
-                return new int[]{i, indexB};
-            }
-        }
-        return new int[]{-1, -1};
-    }
+    public String longestPalindrome(String s) {
+        if (s == null || s.length() < 2)
+            return s;
 
-    public int[] twoSum2(int[] nums, int target) {
-        Map<Integer, Integer> m = new HashMap<>();
-        for (int i = 0; i < nums.length; i++) {
-            if (m.get(target - nums[i]) != null) {
-                return new int[]{m.get(target - nums[i]), i};
+        int len = s.length();
+        int maxLen = 1;
+        boolean[][] dp = new boolean[len][len];
+
+        String longest = null;
+        for (int l = 0; l < s.length(); l++) {
+            for (int i = 0; i < len - l; i++) {
+                int j = i + l;
+                if (s.charAt(i) == s.charAt(j) && (j - i <= 2 || dp[i + 1][j - 1])) {
+                    dp[i][j] = true;
+
+                    if (j - i + 1 > maxLen) {
+                        maxLen = j - i + 1;
+                        longest = s.substring(i, j + 1);
+                    }
+                }
             }
-            m.put(nums[i], i);
         }
-        return new int[]{-1, -1};
+
+        return longest;
     }
 
 
@@ -60,12 +53,27 @@ public class TestTemp {
         map.put(b, b);
         map.put(c, c);
         map.put(d, d);
+        System.out.println(map);
 
     }
 
     @Test
     public void test3() {
-        
+        float size = 9.0f;
+        float loadFactor = 0.3f;
+        float capacity = size / loadFactor;
+        int intCapacity = (int) (size / loadFactor);
+        System.out.println("float 精确计算  ");
+        System.out.println(capacity);
+        System.out.println(capacity * loadFactor);
+        System.out.println("int 精确计算  ");
+        System.out.println(intCapacity);
+        System.out.println(intCapacity * loadFactor);
+    }
+
+    @Test
+    public void test4() {
+        System.out.println(-1 >> 2);
     }
 
 }
