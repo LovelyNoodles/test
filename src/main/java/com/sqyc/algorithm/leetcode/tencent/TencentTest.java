@@ -173,10 +173,10 @@ public class TencentTest {
      */
     @Test
     public void test3() {
-        System.out.println(longestPalindrome1("babad"));
-        System.out.println(longestPalindrome2("babad"));
-        System.out.println(longestPalindrome3("babad"));
-        System.out.println(longestPalindrome4("babad"));
+//        System.out.println(longestPalindrome1("babad"));
+//        System.out.println(longestPalindrome2("babad"));
+//        System.out.println(longestPalindrome3("babad"));
+        System.out.println(longestPalindrome4("ac"));
     }
 
     /**
@@ -190,7 +190,7 @@ public class TencentTest {
         boolean[][] dp = new boolean[len][len];
 
         int maxLen = 1;
-        String longest = null;
+        String longest = s.substring(0, 1);
         for (int pl = 0; pl < len; pl++) {
             for (int i = 0; i < len - pl; i++) {
                 int j = i + pl;

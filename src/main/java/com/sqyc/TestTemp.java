@@ -8,10 +8,39 @@ public class TestTemp {
 
     @Test
     public void test1() {
-        System.out.println(longestPalindrome("babad"));
+        System.out.println(Integer.toBinaryString(-1));
+        System.out.println(Integer.MAX_VALUE);
+        System.out.println(-Integer.MAX_VALUE);
+        System.out.println(Integer.MIN_VALUE);
+//        System.out.println(myAtoi("  -babad"));
+
+
     }
 
-    public String longestPalindrome(String s) {
+    public String myAtoi(String s) {
+        boolean start = false;
+        boolean negative = false;// 是否为负数
+        int result = 0;
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+            if ('+' != c && '-' != c && (c < '0' || c > '9')) {// 决定数字部分的开始和结尾
+                if (start) {
+                    break;
+                } else {
+                    continue;
+                }
+            }
+            start = true;
+
+            if (c == '-' || c == '+' || (c > '0' && c < '9')) {
+                if (c == '-') {
+                    negative = true;
+                }
+                result = result * 10 + c;
+            } else {
+                continue;
+            }
+        }
         return s;
     }
 
