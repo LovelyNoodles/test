@@ -1,7 +1,6 @@
 package com.sqyc.algorithm.leetcode.tencent;
 
 import com.alibaba.fastjson.JSON;
-import org.apache.commons.lang3.ArrayUtils;
 import org.junit.Test;
 
 import java.util.Arrays;
@@ -40,12 +39,21 @@ public class TencentTest {
         for (int i = 0; i < nums.length; i++) {
             int a = nums[i];
             int b = target - a;
-            int indexB = ArrayUtils.indexOf(nums, b);
+            int indexB = indexOf(nums, b);
             if (indexB != i && indexB >= 0) {
                 return new int[]{i, indexB};
             }
         }
         return new int[]{-1, -1};
+    }
+
+    private int indexOf(int[] nums, int b) {
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] == b) {
+                return i;
+            }
+        }
+        return -1;
     }
 
     public int[] twoSum2(int[] nums, int target) {
@@ -202,7 +210,7 @@ public class TencentTest {
     }
 
     /**
-     *Manacher 算法（“马拉车”算法）：它专门用于解决“最长回文子串”问题，时间复杂度为O(N)。
+     * Manacher 算法（“马拉车”算法）：它专门用于解决“最长回文子串”问题，时间复杂度为O(N)。
      */
     private boolean longestPalindrome3(String babad) {
         return false;
