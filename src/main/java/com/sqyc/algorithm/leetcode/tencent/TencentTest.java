@@ -1,5 +1,6 @@
 package com.sqyc.algorithm.leetcode.tencent;
 
+import com.alibaba.fastjson.JSON;
 import org.apache.commons.lang3.ArrayUtils;
 import org.junit.Test;
 
@@ -164,13 +165,47 @@ public class TencentTest {
      */
     @Test
     public void test3() {
-        System.out.println(longestPalindrome1("abc"));
-        System.out.println(longestPalindrome2("abc"));
-        System.out.println(longestPalindrome3("abc"));
+        System.out.println(longestPalindrome1("babad"));
+        System.out.println(longestPalindrome2("babad"));
+        System.out.println(longestPalindrome3("babad"));
+        System.out.println(longestPalindrome4("babad"));
     }
 
-    private String longestPalindrome3(String s) {
-        return s;
+    /**
+     * 动态规划算法：一种算法思想，可系统学习
+     */
+    private String longestPalindrome4(String s) {
+        if (s == null || s.length() < 2)
+            return s;
+
+        int len = s.length();
+        boolean[][] dp = new boolean[len][len];
+
+        int maxLen = 1;
+        String longest = null;
+        for (int pl = 0; pl < len; pl++) {
+            for (int i = 0; i < len - pl; i++) {
+                int j = i + pl;
+                if (s.charAt(i) == s.charAt(j) && (pl <= 2 || dp[i + 1][j - 1])) {// 头尾相等且(子串长度<=3[头尾相等且长度<=3的一定是回文子串] 或 子串内部的子子串也是回文子串)
+                    dp[i][j] = true;
+
+                    if (j - i + 1 > maxLen) {
+                        maxLen = j - i + 1;
+                        longest = s.substring(i, j + 1);
+                    }
+                }
+            }
+        }
+        System.out.println(JSON.toJSONString(dp));
+
+        return longest;
+    }
+
+    /**
+     *Manacher 算法（“马拉车”算法）：它专门用于解决“最长回文子串”问题，时间复杂度为O(N)。
+     */
+    private boolean longestPalindrome3(String babad) {
+        return false;
     }
 
     /**
