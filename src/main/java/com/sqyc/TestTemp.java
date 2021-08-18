@@ -2,9 +2,7 @@ package com.sqyc;
 
 import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 public class TestTemp {
 
@@ -17,15 +15,70 @@ public class TestTemp {
 //    -105 <= nums[i] <= 105
 
     public List<List<Integer>> threeSum(int[] nums) {
+        if (nums.length < 3) {
+            return Collections.emptyList();
+        }
+
+        Arrays.sort(nums);
+
         List<List<Integer>> result = new ArrayList<>();
+
+        Map<Integer, List<Integer>> exists = new HashMap<>();
+        for (int i = 0; i < nums.length; i++) {
+            exists.merge(nums[i], new ArrayList<>(Collections.singleton(i)), (indices, value) -> {
+                indices.addAll(value);
+                return indices;
+            });
+        }
         for (int i = 0; i < nums.length; i++) {
             int num = nums[i];
             for (int j = i + 1; j < nums.length; j++) {
-                int target = num - nums[j];
+                int target = -num - nums[j];
+                int index = Arrays.binarySearch(nums, j + 1, nums.length, target);
+                if (index > -1) {
+                    List<Integer> list = new ArrayList<>();
+                    list.add(num);
+                    list.add(nums[j]);
+                    list.add(target);
 
+                    result.add(list);
+                }
             }
         }
-        return null;
+        return result;
+    }
+
+    public List<List<Integer>> threeSum1(int[] nums) {
+        if (nums.length < 3) {
+            return Collections.emptyList();
+        }
+
+        List<List<Integer>> result = new ArrayList<>();
+
+        Map<Integer, List<Integer>> exists = new HashMap<>();
+        for (int i = 0; i < nums.length; i++) {
+            exists.merge(nums[i], new ArrayList<>(Collections.singleton(i)), (indices, value) -> {
+                indices.addAll(value);
+                return indices;
+            });
+        }
+        for (int i = 0; i < nums.length; i++) {
+            int num = nums[i];
+            for (int j = i + 1; j < nums.length; j++) {
+                int target = -num - nums[j];
+                List<Integer> indices = exists.get(target);
+                int limit = j;
+                if (indices != null && indices.stream().anyMatch(index -> index > limit)) {
+                    List<Integer> list = new ArrayList<>();
+                    list.add(num);
+                    list.add(nums[j]);
+                    list.add(target);
+
+                    result.add(list);
+                }
+            }
+        }
+        return result;
     }
 
 
