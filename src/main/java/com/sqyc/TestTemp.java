@@ -8,56 +8,29 @@ public class TestTemp {
 
     @Test
     public void test1() {
-//        int[] nums = {-1, 0, 1, 2, -1, -4};
-        int[] nums = {-1, -6, -3, 3, 3, 1, 7, -6, -2, -1};
-        System.out.println(threeSum(nums));
-        Arrays.sort(nums);
-        Arrays.stream(nums).forEach(System.out::println);
+        System.out.println(multiply("2", "3"));
+        System.out.println(multiply("123", "456"));
     }
-//    0 <= nums.length <= 3000
-//    -105 <= nums[i] <= 105
 
-    public List<List<Integer>> threeSum(int[] nums) {
-        // result 内的格式为{[first,second,third],[first,second,third],[first,second,third]}
-        List<List<Integer>> result = new ArrayList<>();
-        if (nums.length < 3) {
-            return result;
+    public String multiply(String num1, String num2) {
+        int length1 = num1.length();
+        int length2 = num2.length();
+        if (length1 == 0 || length2 == 0) {
+            return "";
+        }
+        int[] result = new int[length1 + length2];
+        for (int i = 0; i < result.length; i++) {
+            result[i] = 0;
         }
 
-        // 因为first + second + third = 0，所以其中必有一个为负数，所以在这里假设first <= 0，则second < third ;
-        Arrays.sort(nums);
-        for (int i = 0; i < nums.length - 2; i++) {
-            int first = nums[i];
-            if (first > 0) {// first不为负数则结束
-                break;
-            }
-            if (i > 0 && first == nums[i - 1]) {// 按first过滤计算过的数，多所以不提前过滤到重复值，是因为可能存在：a+b+c=a+a+(-2*a)=0
-                continue;
-            }
-            int left = i + 1, right = nums.length - 1;
-            int target = -first;
-            while (left < right) {
-                // 先用再去重，防止存在[-2, 1, 1]这种类型的数据出现
-                int second = nums[left];
-                int third = nums[right];
-                if (second + third == target) {// 如果 second + third = target，过滤到相同组合的[second, third]，指针指向新数值对
-                    result.add(Arrays.asList(first, second, third));
-                    while (second == nums[left + 1]) {
-                        left++;
-                    }
-                    while (third == nums[right - 1]) {
-                        right--;
-                    }
-                    left++;
-                    right--;
-                } else if (second + third < target) {// 如果 second + third < target，则要后有序数线，随着 second 的增大，second + third 接近 target
-                    left++;
-                } else {
-                    right--;
-                }
+        for (int b = length2 - 1; b >= 0; b--) {
+            for (int a = length1 - 1; a >= 0; a--) {
+                int weight = 0;
             }
         }
-        return result;
+
+
+        return "";
     }
 
 
@@ -95,7 +68,12 @@ public class TestTemp {
 
     @Test
     public void test4() {
-        System.out.println(-1 >> 2);
+        Map<Object, Object> map = new HashMap<>();
+        Set<Map.Entry<Object, Object>> entries = map.entrySet();
+        for (Map.Entry<Object, Object> entry : entries) {
+            Object key = entry.getKey();
+            Object value = entry.getValue();
+        }
     }
 
 }

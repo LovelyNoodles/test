@@ -121,5 +121,10 @@
             <version>3.3.0</version>
             <scope>compile</scope>
         </dependency>
+        <dependency>
+            <groupId>cglib</groupId>
+            <artifactId>cglib</artifactId>
+            <version>LATEST</version>
+        </dependency>
     </dependencies>
 </project>

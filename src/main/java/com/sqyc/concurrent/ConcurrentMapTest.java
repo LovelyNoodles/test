@@ -10,7 +10,7 @@ import java.util.concurrent.TimeUnit;
 
 public class ConcurrentMapTest {
     public static void main(String[] args) {
-        ConcurrentMap<Object, Object> map = new ConcurrentHashMap<>();
+        ConcurrentMap<Object, Object> map = new ConcurrentHashMap<>(16);
         map.put("", null);
     }
 
