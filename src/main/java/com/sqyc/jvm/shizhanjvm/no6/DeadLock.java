@@ -66,7 +66,7 @@ public class DeadLock extends Thread {
 
     public static void main(String[] args) throws InterruptedException {
         DeadLock car2south = new DeadLock(south);
-        DeadLock car2north = new DeadLock(south);
+        DeadLock car2north = new DeadLock(north);
         car2south.start();
         car2north.start();
         Thread.sleep(1000);
