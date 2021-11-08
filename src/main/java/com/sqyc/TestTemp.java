@@ -122,4 +122,12 @@ public class TestTemp {
         }
     }
 
+
+    @Test
+    public void test5() {
+        System.out.println(Integer.toBinaryString(-1));
+        System.out.println(Integer.toBinaryString(6));
+        System.out.println(Integer.toBinaryString(-6));
+    }
+
 }
